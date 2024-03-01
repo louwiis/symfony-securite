@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PostController!{% endblock %}
+
+{% block body %}
+<style>
+    .posts { display: flex; flex-direction: column; gap: 12px; align-items: center; background-color: lightgray; padding: 16px; border-radius: 16px; }
+    .post { background-color: white; padding: 8px; border-radius: 8px; width: 500px; }
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Posts {{ controller_name }}! ✅</h1>
+
+    {% if app.user %}
+        <p>Connecté en tant que {{ app.user.email }}</p>
+        <a href="/logout">Logout</a>
+    {% else %}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    {% endif %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <h2>Ajouter un post</h2>
+        {{ form(form)}}
+    {% endif %}
+
+    <h2>Posts</h2>
+
+    <div class="posts">
+        {% for post in posts %}
+            <div class="post">
+                <div class="content">
+                    <p>
+                        {{ post.content|raw }}
+                    </p>
+                </div>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="actions">
+                        <button><a href='/post/edit/{{post.id}}'>Edit</a></button>
+                        <form method="POST" action={{ path('app_post_delete', {'id': post.id}) }}>
+                            <input type="hidden" name="_token" value="{{ csrf_token('post_delete' ~ post.id) }}">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        {% else %}
+            <p>Aucun post</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PostController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Posts {{ controller_name }}! ✅</h1>
+
+    {% if app.user %}
+        <p>Connecté en tant que {{ app.user.email }}</p>
+        <a href="/logout">Logout</a>
+    {% else %}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    {% endif %}
+
+    <h2>Edit Posts</h2>
+
+         {# create a form to edit #}
+    <form action="{{ path('app_post_edit', {'id': post.id}) }}" method="post">
+        <input type="hidden" name="_token" value="{{ csrf_token('edit' ~ post.id) }}">
+        {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        {{ form_end(edit_form) }}
+    </form>
+</div>
+{% endblock %}
