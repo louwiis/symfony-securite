@@ -36,4 +36,4 @@ Ce guide vise à fournir des recommandations exhaustives pour maintenir le site.
 
 ## Conclusion
 
-En suivant ces recommandations de sécurité et en restant vigilant à l'évolution des menaces potentielles, vous pouvez renforcer la sécurité de votre site Symfony CRUD et protéger les données sensibles de vos utilisateurs. N'oubliez pas de maintenir une veille active sur les meilleures pratiques de sécurité et d'adapter vos mesures en conséquence.
+En suivant ces recommandations de sécurité et en restant vigilant à l'évolution des menaces potentielles, vous pourez renforcer la sécurité du site et protéger les données sensibles de nos utilisateurs. N'oubliez pas de maintenir une veille active sur les meilleures pratiques de sécurité et d'adapter vos mesures en conséquence.
